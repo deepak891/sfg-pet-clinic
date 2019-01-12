@@ -7,7 +7,7 @@ import java.util.Set;
 public interface VetService {
     Vet findById(Long Id);
 
-    Vet save(Vetowner);
+    Vet save(Vet owner);
 
     Set<Vet> findAll();
 }
