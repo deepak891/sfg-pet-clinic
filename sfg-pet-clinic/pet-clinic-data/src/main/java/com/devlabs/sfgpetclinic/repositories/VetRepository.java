@@ -1,7 +1,7 @@
 package com.devlabs.sfgpetclinic.repositories;
 
 import com.devlabs.sfgpetclinic.model.Vet;
-import com.devlabs.sfgpetclinic.service.CurdService;
+import org.springframework.data.repository.CrudRepository;
 
-public interface VetRepository extends CurdService<Vet, Long> {
+public interface VetRepository extends CrudRepository<Vet, Long> {
 }
