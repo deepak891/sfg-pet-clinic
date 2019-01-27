@@ -1,10 +1,7 @@
 package com.devlabs.sfgpetclinic.bootstrap;
 
 import com.devlabs.sfgpetclinic.model.*;
-import com.devlabs.sfgpetclinic.service.OwnerService;
-import com.devlabs.sfgpetclinic.service.PetTypeService;
-import com.devlabs.sfgpetclinic.service.SpecialtyService;
-import com.devlabs.sfgpetclinic.service.VetService;
+import com.devlabs.sfgpetclinic.service.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -17,12 +14,14 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialtyService specialtyService;
+    private final VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialtyService specialtyService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialtyService specialtyService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialtyService = specialtyService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -79,13 +78,19 @@ public class DataLoader implements CommandLineRunner {
         owner2.setTelephone("33333");
 
         Pet nimmiPet = new Pet();
-        deepakPet.setPetType(savedCatPetType);
-        deepakPet.setOwner(owner2);
-        deepakPet.setBirthDate(LocalDate.now());
-        deepakPet.setName("Juat Cat");
-        owner1.getPets().add(nimmiPet);
+        nimmiPet.setPetType(savedCatPetType);
+        nimmiPet.setOwner(owner2);
+        nimmiPet.setBirthDate(LocalDate.now());
+        nimmiPet.setName("Juat Cat");
+        owner2.getPets().add(nimmiPet);
         ownerService.save(owner2);
 
+        Visit catVisit = new Visit();
+        catVisit.setPet(nimmiPet);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("Sneezy kitty");
+
+        visitService.save(catVisit);
         System.out.println("Loaded Owner...");
 
         Vet vet1 = new Vet();
