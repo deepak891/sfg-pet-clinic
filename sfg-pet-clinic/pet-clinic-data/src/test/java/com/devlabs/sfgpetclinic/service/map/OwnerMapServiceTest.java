@@ -24,7 +24,7 @@ class OwnerMapServiceTest {
     void findAll() {
         Set<Owner> ownerSet = ownerMapService.findAll();
 
-        assertEquals(1, ownerSet);
+        assertEquals(1, ownerSet.size());
     }
 
     @Test
@@ -52,7 +52,7 @@ class OwnerMapServiceTest {
     void saveNoId() {
         Owner savedOwner = Owner.builder().build();
         assertNotNull(savedOwner);
-        assertNotNull(savedOwner.getId());
+        assertNull(savedOwner.getId());
     }
 
     @Test
